@@ -27,9 +27,13 @@ export default class FbankApi {
     }
   }
 
-  static async login(userData) {
+  static async login(cpf, password) {
     try {
-      const response = await api.post(LOGIN, userData);
+      const payload = {
+        cpf,
+        password,
+      };
+      const response = await api.post(LOGIN, payload);
       return response.data;
     } catch (err) {
       throw new Error(err);
@@ -65,5 +69,13 @@ export default class FbankApi {
     }
   }
   // Accounts requests
+  static async getAccountByUserId(id) {
+    try {
+      const response = await api.get(`accounts/${id}`);
+      return response.data;
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
   // Transactions requests
 }

@@ -15,12 +15,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Gibson',
     color: '#000000',
-    marginBottom: 20,
+    marginBottom: 15,
+    marginLeft: 5,
   },
   input: {
     backgroundColor: '#E5E5E5',
     borderRadius: 50,
-    width: '100%',
     marginBottom: 20,
     paddingLeft: 15,
   },
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 60,
+    marginBottom: 80,
   },
   footerText: {
     fontSize: 18,

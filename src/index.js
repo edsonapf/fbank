@@ -1,8 +1,8 @@
 import React from 'react';
-import Login from './pages/Login';
+import LoginMain from './pages/LoginMain';
 
 const App = () => {
-  return <Login />;
+  return <LoginMain />;
 };
 
 export default App;

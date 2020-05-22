@@ -23,7 +23,7 @@ const applicationJsonRoutes = url => {
 
 const api = axios.create({
   baseURL: API_URL,
-  timeout: TIMEOUT_API,
+  timeout: parseInt(TIMEOUT_API),
 });
 
 api.interceptors.request.use(
@@ -36,7 +36,6 @@ api.interceptors.request.use(
     config.headers['Content-Type'] = applicationJsonRoutes(config.url)
       ? 'application/json'
       : 'multipart/form-data';
-
     return config;
   },
   error => {
@@ -50,25 +49,25 @@ api.interceptors.response.use(
   },
   async error => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+    if (
+      error.response.status === 401 &&
+      !originalRequest.url.endsWith(REFRESH_TOKEN)
+    ) {
       const refresh_token = await AsyncStorage.getItem('refresh_token');
       if (refresh_token) {
-        return api
-          .post(REFRESH_TOKEN, {
+        try {
+          const {token, refreshToken} = await api.post(REFRESH_TOKEN, {
             refreshToken: refresh_token,
-          })
-          .then(async response => {
-            const {token, refreshToken} = response.data;
+          });
+          if (token && refreshToken) {
             await AsyncStorage.setItem('token', token);
             await AsyncStorage.setItem('refresh_token', refreshToken);
-            return api(originalRequest);
-          })
-          .catch(err => {
-            return Promise.reject(err);
-          });
+          }
+          return api(originalRequest);
+        } catch (err) {
+          return Promise.reject(err);
+        }
       }
-
       return Promise.reject(error);
     }
     return Promise.reject(error);

@@ -39,7 +39,7 @@ api.interceptors.request.use(
     return config;
   },
   error => {
-    return Promise.reject(error);
+    return Promise.reject(error.response);
   },
 );
 
@@ -65,12 +65,12 @@ api.interceptors.response.use(
           }
           return api(originalRequest);
         } catch (err) {
-          return Promise.reject(err);
+          return Promise.reject(err.response);
         }
       }
-      return Promise.reject(error);
+      return Promise.reject(error.response);
     }
-    return Promise.reject(error);
+    return Promise.reject(error.response);
   },
 );
 

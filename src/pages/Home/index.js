@@ -46,6 +46,7 @@ const transactionMock = [
 export default function() {
   const [currentMonth, setCurrentMonth] = useState('');
   const [monthValue, setMonthValue] = useState(0.0);
+  const [accountBalance, setAccountBalance] = useState(120.55);
 
   useEffect(() => {
     setCurrentMonth(monthNames[new Date().getMonth()]);
@@ -64,23 +65,18 @@ export default function() {
   return (
     <View style={styles.main}>
       <Header menu />
-      <View>
-        <Text>Value {currentMonth}</Text>
-        <Text>$ {monthValue.toFixed(2)}</Text>
+      <View style={styles.chartHeaderContainer}>
+        <Text style={styles.charHeaderText}>Value {currentMonth}</Text>
+        <Text style={styles.charHeaderTextValue}>
+          $ {monthValue.toFixed(2)}
+        </Text>
       </View>
       <LineChart
         data={{
           labels: ['January', 'February', 'March', 'April', 'May', 'June'],
           datasets: [
             {
-              data: [
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-              ],
+              data: [-1.5, 12, 346.65, 213.51, -321.25],
             },
           ],
         }}
@@ -109,6 +105,7 @@ export default function() {
         bezier
         style={{
           marginVertical: 8,
+          marginHorizontal: 16,
           borderRadius: 16,
         }}
       />
@@ -127,7 +124,10 @@ export default function() {
           </View>
         ))}
       </View>
-      <Text>A</Text>
+      <View style={styles.titleSectionContainer}>
+        <TitleSection title="Account balance" />
+      </View>
+      <Text style={styles.balanceText}>$ {accountBalance}</Text>
     </View>
   );
 }

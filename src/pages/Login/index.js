@@ -8,23 +8,29 @@ import {
   Image,
   View,
 } from 'react-native';
+import {useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import FbankApi from '../../services';
+import {login as loginAction} from '../../store/actions/userAction';
 import styles from './styles';
-import Logo from '../../assets/img/Logo.png';
+import Logo from '../../assets/img/logo.svg';
+// import Logo from '../../assets/img/Logo.png';
 import Check from '../../assets/img/check.png';
 
 export default function() {
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
   async function login() {
     try {
       const {token, refreshToken} = await FbankApi.login(cpf, password);
       await AsyncStorage.setItem('token', token);
       await AsyncStorage.setItem('refresh_token', refreshToken);
+      dispatch(loginAction({token, refreshToken}));
     } catch (err) {
-      console.warn(err);
+      const error = JSON.parse(err.message);
+      console.warn(error);
     }
   }
 
@@ -47,7 +53,7 @@ export default function() {
   return (
     <KeyboardAvoidingView style={styles.main}>
       <ScrollView contentContainerStyle={styles.scroll}>
-        <Image source={Logo} />
+        <Logo height={250} width={250} />
         <View style={{width: '100%'}}>
           <Text style={styles.inputTitles}>CPF</Text>
           <TextInput

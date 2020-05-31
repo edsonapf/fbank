@@ -36,7 +36,7 @@ export default class FbankApi {
       const response = await api.post(LOGIN, payload);
       return response.data;
     } catch (err) {
-      throw new Error(err);
+      throw new Error(JSON.stringify(err));
     }
   }
 

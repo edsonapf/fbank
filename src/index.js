@@ -1,8 +1,14 @@
 import React from 'react';
-import LoginMain from './pages/LoginMain';
+import {Provider} from 'react-redux';
+import store from './store';
+import Routes from './routes';
 
 const App = () => {
-  return <LoginMain />;
+  return (
+    <Provider store={store}>
+      <Routes />
+    </Provider>
+  );
 };
 
 export default App;

@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: 125,
     height: 125,
+    marginTop: 16,
+    justifyContent: 'space-between',
+    padding: 8,
   },
   text: {
     fontSize: 18,

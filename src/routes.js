@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
+import Profile from './pages/Profile';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ export default function() {
           <>
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Menu" component={Menu} />
+            <Stack.Screen name="Profile" component={Profile} />
           </>
         ) : (
           <Stack.Screen name="Login" component={Login} />

@@ -1,16 +1,18 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  main: {
-    borderRadius: 50,
-    backgroundColor: '#000000',
-    paddingHorizontal: 16,
-    paddingVertical: 3,
+  imageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  text: {
-    fontSize: 16,
+  image: {
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+  },
+  name: {
+    fontSize: 20,
     fontWeight: 'bold',
-    color: '#FFFFFF',
   },
 });
 

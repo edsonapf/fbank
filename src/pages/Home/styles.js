@@ -1,10 +1,6 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-  },
   chartHeaderContainer: {
     paddingHorizontal: 16,
   },
@@ -20,7 +16,7 @@ const styles = StyleSheet.create({
   titleSectionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
+    paddingRight: 8,
     marginTop: 8,
     marginBottom: 8,
   },

@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, Dimensions} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import styles from './styles';
 import FbankApi from '../../services';
+import AppContainer from '../../components/AppContainer';
 import Header from '../../components/Header';
 import TitleSection from '../../components/TitleSection';
 import SearchIcon from '../../assets/img/search_icon.svg';
@@ -55,16 +56,15 @@ export default function() {
 
   async function press() {
     try {
-      const response = await FbankApi.getAccountByUserId(2);
-      console.warn(response);
+      // const response = await FbankApi.getAccountByUserId(2);
+      console.warn('response');
     } catch (err) {
       console.warn(err);
     }
   }
 
   return (
-    <View style={styles.main}>
-      <Header menu />
+    <AppContainer menu>
       <View style={styles.chartHeaderContainer}>
         <Text style={styles.charHeaderText}>Value {currentMonth}</Text>
         <Text style={styles.charHeaderTextValue}>
@@ -128,6 +128,9 @@ export default function() {
         <TitleSection title="Account balance" />
       </View>
       <Text style={styles.balanceText}>$ {accountBalance}</Text>
-    </View>
+    </AppContainer>
+    // <View style={styles.main}>
+    //   <Header menu />
+    // </View>
   );
 }

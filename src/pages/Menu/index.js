@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
-import {View, ScrollView, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import AppContainer from '../../components/AppContainer';
-import Header from '../../components/Header';
 import TitleSection from '../../components/TitleSection';
 import FunctionCard from '../../components/FunctionCard';
 import Logo from '../../assets/img/logo_without_name.svg';
+import DepositIcon from '../../assets/img/deposit_icon.svg';
+import WithdrawIcon from '../../assets/img/withdraw_icon.svg';
+import TransferIcon from '../../assets/img/transfer_icon.svg';
 import styles from './styles';
 
 export default function() {
@@ -32,9 +34,21 @@ export default function() {
           <TitleSection title="Functions" />
         </View>
         <View style={{alignItems: 'center', paddingBottom: 8}}>
-          <FunctionCard transactionType="Deposit" />
-          <FunctionCard transactionType="Withdraw" />
-          <FunctionCard transactionType="Transfer" />
+          <TouchableOpacity activeOpacity={0.9}>
+            <FunctionCard transactionType="Deposit">
+              <DepositIcon />
+            </FunctionCard>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.9}>
+            <FunctionCard transactionType="Withdraw">
+              <WithdrawIcon />
+            </FunctionCard>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.9}>
+            <FunctionCard transactionType="Transfer">
+              <TransferIcon />
+            </FunctionCard>
+          </TouchableOpacity>
         </View>
       </View>
     </AppContainer>

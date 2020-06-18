@@ -14,7 +14,6 @@ import FbankApi from '../../services';
 import {login as loginAction} from '../../store/actions/userAction';
 import styles from './styles';
 import Logo from '../../assets/img/logo.svg';
-// import Logo from '../../assets/img/Logo.png';
 import Check from '../../assets/img/check.png';
 
 export default function() {

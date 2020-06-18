@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {View, Text, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import AppContainer from '../../components/AppContainer';
 import TitleSection from '../../components/TitleSection';
 import FunctionCard from '../../components/FunctionCard';
@@ -12,10 +13,18 @@ import styles from './styles';
 
 export default function() {
   const user = useSelector(state => state.userReducer.user.data);
+  const navigation = useNavigation();
 
   useEffect(() => {
     console.log(user);
   });
+
+  function changeScreen(mainScreen, screen) {
+    navigation.navigate(mainScreen, {
+      screen,
+      params: {transaction: mainScreen},
+    });
+  }
 
   return (
     <AppContainer>
@@ -34,19 +43,25 @@ export default function() {
           <TitleSection title="Functions" />
         </View>
         <View style={{alignItems: 'center', paddingBottom: 8}}>
-          <TouchableOpacity activeOpacity={0.9}>
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={() => changeScreen('Deposit', 'DepositOption')}>
             <FunctionCard transactionType="Deposit">
-              <DepositIcon />
+              <DepositIcon stroke="#FFFFFF" strokeWidth="1" fill="#FFFFFF" />
             </FunctionCard>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.9}>
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={() => changeScreen('Withdraw')}>
             <FunctionCard transactionType="Withdraw">
-              <WithdrawIcon />
+              <WithdrawIcon stroke="#FFFFFF" strokeWidth="1" fill="#FFFFFF" />
             </FunctionCard>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.9}>
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={() => changeScreen('Transfer', 'TransferOption')}>
             <FunctionCard transactionType="Transfer">
-              <TransferIcon />
+              <TransferIcon stroke="#FFFFFF" />
             </FunctionCard>
           </TouchableOpacity>
         </View>

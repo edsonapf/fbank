@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, Dimensions} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
+import {List, ListItem, Divider} from '@ui-kitten/components';
 import styles from './styles';
 import FbankApi from '../../services';
 import AppContainer from '../../components/AppContainer';
-import Header from '../../components/Header';
 import TitleSection from '../../components/TitleSection';
 import SearchIcon from '../../assets/img/search_icon.svg';
+import TransferIcon from '../../assets/img/transfer_icon.svg';
+import WithdrawIcon from '../../assets/img/withdraw_icon.svg';
+import DepositIcon from '../../assets/img/deposit_icon.svg';
 
 const monthNames = [
   'January',
@@ -34,7 +37,7 @@ const transactionMock = [
     transaction_type: 2,
     transaction_description: 'Withdraw',
     date: '19/05/2020',
-    value: 121.45,
+    value: -121.45,
   },
   {
     transaction_type: 3,
@@ -63,50 +66,100 @@ export default function() {
     }
   }
 
+  function onPressItem() {
+    console.log('EUUUUUUUUUUUUU');
+  }
+
+  function renderIcon(transactionType) {
+    switch (transactionType) {
+      case 1:
+        return (
+          <DepositIcon
+            stroke="#000000"
+            strokeWidth="1"
+            fill="#000000"
+            height={30}
+            width={30}
+          />
+        );
+      case 2:
+        return (
+          <WithdrawIcon
+            stroke="#000000"
+            strokeWidth="1"
+            fill="#000000"
+            height={30}
+            width={30}
+          />
+        );
+      case 3:
+        return <TransferIcon stroke="#000000" height={30} width={30} />;
+    }
+  }
+
+  function renderItem({item, index}) {
+    return (
+      <ListItem
+        key={index}
+        title={item.transaction_description}
+        description={item.date}
+        accessoryLeft={() => renderIcon(item.transaction_type)}
+        accessoryRight={() => (
+          <Text style={{fontWeight: 'bold'}}>$ {item.value}</Text>
+        )}
+        onPress={onPressItem}
+      />
+    );
+  }
+
   return (
     <AppContainer menu>
       <View style={styles.chartHeaderContainer}>
-        <Text style={styles.charHeaderText}>Value {currentMonth}</Text>
-        <Text style={styles.charHeaderTextValue}>
-          $ {monthValue.toFixed(2)}
-        </Text>
+        <View>
+          <Text style={styles.charHeaderText}>Value {currentMonth}</Text>
+          <Text style={styles.charHeaderTextValue}>
+            $ {monthValue.toFixed(2)}
+          </Text>
+        </View>
+        <TitleSection title="Last 5 months" />
       </View>
       <LineChart
         data={{
-          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+          labels: ['January', 'February', 'March', 'April', 'May'],
           datasets: [
             {
               data: [-1.5, 12, 346.65, 213.51, -321.25],
             },
           ],
         }}
-        withDots={false}
+        withDots={true}
+        withOuterLines={false}
+        withInnerLines={false}
         width={Dimensions.get('window').width} // from react-native
         height={220}
         yAxisLabel="$"
-        yAxisSuffix="k"
         yAxisInterval={1} // optional, defaults to 1
         chartConfig={{
           backgroundColor: '#ffffff',
           backgroundGradientFrom: '#ffffff',
           backgroundGradientTo: '#ffffff',
           decimalPlaces: 2, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(189, 202, 219, ${opacity})`,
-          style: {
-            borderRadius: 16,
-          },
+          color: () => `rgb(0, 0, 0, 0.3)`,
+          labelColor: () => `rgb(189, 202, 219)`,
           propsForDots: {
-            r: '0',
+            r: '3',
+            fill: '#000000',
             strokeWidth: '2',
-            stroke: '#ffa726',
+            stroke: '#000000',
+          },
+          propsForLabels: {
+            fontWeight: 'bold',
+            fontSize: 12,
           },
         }}
         bezier
         style={{
           marginVertical: 8,
-          marginHorizontal: 16,
-          borderRadius: 16,
         }}
       />
       <View style={styles.titleSectionContainer}>
@@ -116,21 +169,25 @@ export default function() {
         </TouchableOpacity>
       </View>
       <View>
-        {transactionMock.map((transaction, index) => (
+        {transactionMock && (
+          <List
+            data={transactionMock}
+            ItemSeparatorComponent={Divider}
+            renderItem={renderItem}
+          />
+        )}
+        {/* {transactionMock.map((transaction, index) => (
           <View key={index}>
             <Text>{transaction.transaction_description}</Text>
             <Text>{transaction.date}</Text>
             <Text>{transaction.value}</Text>
           </View>
-        ))}
+        ))} */}
       </View>
       <View style={styles.titleSectionContainer}>
         <TitleSection title="Account balance" />
       </View>
       <Text style={styles.balanceText}>$ {accountBalance}</Text>
     </AppContainer>
-    // <View style={styles.main}>
-    //   <Header menu />
-    // </View>
   );
 }

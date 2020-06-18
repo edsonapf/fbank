@@ -7,8 +7,33 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
 import Profile from './pages/Profile';
+import DepositOption from './pages/Deposit';
+import DepositConfirmation from './pages/Deposit/DepositConfirmation';
+import Transfer from './pages/Transfer';
+import TransactionSuccess from './components/TransactionSuccess';
 
 const Stack = createStackNavigator();
+
+const DepositStack = () => (
+  <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Screen name="DepositOption" component={DepositOption} />
+    <Stack.Screen name="DepositConfirmation" component={DepositConfirmation} />
+    <Stack.Screen name="SuccessDeposit" component={TransactionSuccess} />
+  </Stack.Navigator>
+);
+
+const WithdrawStack = () => (
+  <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Screen name="SuccessDeposit" component={TransactionSuccess} />
+  </Stack.Navigator>
+);
+
+const TransferStack = () => (
+  <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Screen name="TransferOption" component={Transfer} />
+    <Stack.Screen name="SuccessDeposit" component={TransactionSuccess} />
+  </Stack.Navigator>
+);
 
 export default function() {
   const isLogged = useSelector(state => state.userReducer.user.isLogged);
@@ -19,6 +44,9 @@ export default function() {
           <>
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Menu" component={Menu} />
+            <Stack.Screen name="Deposit" component={DepositStack} />
+            <Stack.Screen name="Withdraw" component={WithdrawStack} />
+            <Stack.Screen name="Transfer" component={TransferStack} />
             <Stack.Screen name="Profile" component={Profile} />
           </>
         ) : (

@@ -2,6 +2,9 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   chartHeaderContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 16,
   },
   charHeaderText: {

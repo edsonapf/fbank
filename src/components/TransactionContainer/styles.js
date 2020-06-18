@@ -1,14 +1,13 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
+  titleSection: {
+    flexDirection: 'row',
+    marginTop: 8,
   },
-  scroll: {
+  childrenContainer: {
     flex: 1,
     flexGrow: 1,
-    paddingHorizontal: 8,
   },
 });
 

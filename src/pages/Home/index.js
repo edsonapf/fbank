@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, Dimensions} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
-import {List, ListItem, Divider} from '@ui-kitten/components';
+import {List, ListItem, Divider, Tooltip} from '@ui-kitten/components';
 import styles from './styles';
 import FbankApi from '../../services';
 import AppContainer from '../../components/AppContainer';
@@ -27,6 +27,24 @@ const monthNames = [
 ];
 
 const transactionMock = [
+  {
+    transaction_type: 1,
+    transaction_description: 'Deposit',
+    date: '19/05/2020',
+    value: 50.01,
+  },
+  {
+    transaction_type: 2,
+    transaction_description: 'Withdraw',
+    date: '19/05/2020',
+    value: -121.45,
+  },
+  {
+    transaction_type: 3,
+    transaction_description: 'Transfer',
+    date: '19/05/2020',
+    value: 77.77,
+  },
   {
     transaction_type: 1,
     transaction_description: 'Deposit',
@@ -112,6 +130,10 @@ export default function() {
     );
   }
 
+  function onDataPointClick({value, dataset, getColor}) {
+    console.warn(value);
+  }
+
   return (
     <AppContainer menu>
       <View style={styles.chartHeaderContainer}>
@@ -139,6 +161,7 @@ export default function() {
         height={220}
         yAxisLabel="$"
         yAxisInterval={1} // optional, defaults to 1
+        onDataPointClick={onDataPointClick}
         chartConfig={{
           backgroundColor: '#ffffff',
           backgroundGradientFrom: '#ffffff',
@@ -168,7 +191,7 @@ export default function() {
           <SearchIcon />
         </TouchableOpacity>
       </View>
-      <View>
+      <View style={{height: 175}}>
         {transactionMock && (
           <List
             data={transactionMock}
@@ -176,13 +199,6 @@ export default function() {
             renderItem={renderItem}
           />
         )}
-        {/* {transactionMock.map((transaction, index) => (
-          <View key={index}>
-            <Text>{transaction.transaction_description}</Text>
-            <Text>{transaction.date}</Text>
-            <Text>{transaction.value}</Text>
-          </View>
-        ))} */}
       </View>
       <View style={styles.titleSectionContainer}>
         <TitleSection title="Account balance" />

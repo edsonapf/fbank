@@ -5,11 +5,14 @@ const styles = StyleSheet.create({
     flex: 1,
     flexGrow: 1,
     paddingHorizontal: 16,
-    paddingTop: 128,
   },
   titleText: {
     color: '#000000',
     fontSize: 20,
+  },
+  balanceText: {
+    color: '#6C7B8A',
+    fontSize: 40,
   },
   input: {
     marginTop: 64,

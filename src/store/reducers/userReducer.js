@@ -8,6 +8,8 @@ const initialState = {
       name: 'Will Smith da Silva',
       cpf: '12345678914',
       account: '1234',
+      profile_photo:
+        'https://res.cloudinary.com/duryni4p4/image/upload/v1589408384/fbank/_selfie_1_1589408383125.jpg',
     },
   },
   tokens: {

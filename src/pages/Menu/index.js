@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {TextMask} from 'react-native-masked-text';
 import AppContainer from '../../components/AppContainer';
 import TitleSection from '../../components/TitleSection';
 import FunctionCard from '../../components/FunctionCard';
@@ -31,7 +32,9 @@ export default function() {
       <View style={styles.cardContainer}>
         <View>
           <Text style={styles.cardText}>Name: {user.name}</Text>
-          <Text style={styles.cardText}>CPF: {user.cpf}</Text>
+          <Text style={styles.cardText}>
+            CPF: <TextMask type={'cpf'} value={user.cpf} />
+          </Text>
         </View>
         <View style={styles.accountInformationContainer}>
           <Text style={styles.cardText}>Account: {user.account}</Text>
@@ -45,21 +48,21 @@ export default function() {
         <View style={{alignItems: 'center', paddingBottom: 8}}>
           <TouchableOpacity
             activeOpacity={0.9}
-            onPress={() => changeScreen('Deposit', 'DepositOption')}>
+            onPress={() => changeScreen('Deposit', 'DepositValue')}>
             <FunctionCard transactionType="Deposit">
               <DepositIcon stroke="#FFFFFF" strokeWidth="1" fill="#FFFFFF" />
             </FunctionCard>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.9}
-            onPress={() => changeScreen('Withdraw')}>
+            onPress={() => changeScreen('Withdraw', 'WithdrawValue')}>
             <FunctionCard transactionType="Withdraw">
               <WithdrawIcon stroke="#FFFFFF" strokeWidth="1" fill="#FFFFFF" />
             </FunctionCard>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.9}
-            onPress={() => changeScreen('Transfer', 'TransferOption')}>
+            onPress={() => changeScreen('Transfer', 'TransferValue')}>
             <FunctionCard transactionType="Transfer">
               <TransferIcon stroke="#FFFFFF" />
             </FunctionCard>

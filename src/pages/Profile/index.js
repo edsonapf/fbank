@@ -4,7 +4,6 @@ import {useSelector} from 'react-redux';
 import AppContainer from '../../components/AppContainer';
 import TitleSection from '../../components/TitleSection';
 import QRCode from '../../assets/img/qr_code.png';
-import Person from '../../assets/img/person.jpg';
 import styles from './styles';
 
 export default function() {
@@ -14,7 +13,7 @@ export default function() {
     <AppContainer photo>
       <View style={styles.imageContainer}>
         <TouchableOpacity style={styles.image} activeOpacity={0.8}>
-          <Image source={Person} style={styles.image} />
+          <Image source={{uri: user.profile_photo}} style={styles.image} />
         </TouchableOpacity>
         <Text style={styles.name}>{user.name}</Text>
       </View>

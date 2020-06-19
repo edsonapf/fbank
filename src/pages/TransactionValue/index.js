@@ -1,7 +1,7 @@
 import React, {useState, createRef} from 'react';
 import {View, Text, TouchableOpacity, TextInput, Image} from 'react-native';
-import {TextInputMask} from 'react-native-masked-text';
 import {useNavigation} from '@react-navigation/native';
+import {TextInputMask} from 'react-native-masked-text';
 import TransactionContainer from '../../components/TransactionContainer';
 import CheckIcon from '../../assets/img/check.png';
 import styles from './styles';
@@ -12,21 +12,30 @@ export default function({route}) {
   const navigation = useNavigation();
 
   function onChangeText(text) {
-    console.warn(cpfField.getRawValue());
     setValue(text);
   }
 
   function onPress() {
     const {transaction} = route.params;
     navigation.navigate(`${transaction}Confirmation`, {
-      transaction: route.params.transaction,
+      transaction: transaction,
       transactionValue: cpfField.getRawValue(),
     });
   }
 
   return (
     <TransactionContainer title={route.params.transaction}>
-      <View style={styles.main}>
+      <View
+        style={[
+          styles.main,
+          {paddingTop: route.params.transaction === 'Withdraw' ? 64 : 128},
+        ]}>
+        {route.params.transaction === 'Withdraw' && (
+          <View style={{alignItems: 'center', marginBottom: 32}}>
+            <Text style={styles.titleText}>Account balance</Text>
+            <Text style={styles.balanceText}>$ 120.00</Text>
+          </View>
+        )}
         <Text style={styles.titleText}>
           Type the{' '}
           <Text style={{fontWeight: 'bold'}}>{route.params.transaction}</Text>{' '}

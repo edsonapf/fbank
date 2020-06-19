@@ -7,8 +7,10 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
 import Profile from './pages/Profile';
-import DepositOption from './pages/Deposit';
-import DepositConfirmation from './pages/Deposit/DepositConfirmation';
+// import DepositOption from './pages/Deposit';
+// import DepositConfirmation from './pages/Deposit/DepositConfirmation';
+import TransactionValue from './pages/TransactionValue';
+import TransactionConfirmation from './pages/TransactionConfirmation';
 import Transfer from './pages/Transfer';
 import TransactionSuccess from './components/TransactionSuccess';
 
@@ -16,22 +18,34 @@ const Stack = createStackNavigator();
 
 const DepositStack = () => (
   <Stack.Navigator screenOptions={{headerShown: false}}>
-    <Stack.Screen name="DepositOption" component={DepositOption} />
-    <Stack.Screen name="DepositConfirmation" component={DepositConfirmation} />
-    <Stack.Screen name="SuccessDeposit" component={TransactionSuccess} />
+    <Stack.Screen name="DepositValue" component={TransactionValue} />
+    <Stack.Screen
+      name="DepositConfirmation"
+      component={TransactionConfirmation}
+    />
+    <Stack.Screen name="DepositSuccess" component={TransactionSuccess} />
   </Stack.Navigator>
 );
 
 const WithdrawStack = () => (
   <Stack.Navigator screenOptions={{headerShown: false}}>
-    <Stack.Screen name="SuccessDeposit" component={TransactionSuccess} />
+    <Stack.Screen name="WithdrawValue" component={TransactionValue} />
+    <Stack.Screen
+      name="WithdrawConfirmation"
+      component={TransactionConfirmation}
+    />
+    <Stack.Screen name="WithdrawSuccess" component={TransactionSuccess} />
   </Stack.Navigator>
 );
 
 const TransferStack = () => (
   <Stack.Navigator screenOptions={{headerShown: false}}>
-    <Stack.Screen name="TransferOption" component={Transfer} />
-    <Stack.Screen name="SuccessDeposit" component={TransactionSuccess} />
+    <Stack.Screen name="TransferValue" component={TransactionValue} />
+    <Stack.Screen
+      name="TransferConfirmation"
+      component={TransactionConfirmation}
+    />
+    <Stack.Screen name="TransferSuccess" component={TransactionSuccess} />
   </Stack.Navigator>
 );
 

@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Modal, Input} from '@ui-kitten/components';
-import TransactionContainer from '../../../components/TransactionContainer';
+import TransactionContainer from '../../components/TransactionContainer';
 import styles from './styles';
-import CheckIcon from '../../../assets/img/check.png';
+import CheckIcon from '../../assets/img/check.png';
 
 export default function({route}) {
   const [modal, setModal] = useState(false);
@@ -65,8 +65,12 @@ export default function({route}) {
       <View style={styles.main}>
         <Text style={styles.titleText}>Confirm your data</Text>
         <View style={{marginTop: 32}}>
-          <Text style={styles.titleText}>Account: 1</Text>
-          <Text style={styles.titleText}>Name: Will Smith da Silva</Text>
+          <Text style={styles.titleText}>
+            Account: <Text style={{fontWeight: 'bold'}}>1</Text>
+          </Text>
+          <Text style={styles.titleText}>
+            Name: <Text style={{fontWeight: 'bold'}}>Will Smith da Silva</Text>
+          </Text>
         </View>
         <View style={{marginVertical: 64, alignItems: 'center'}}>
           <Text style={styles.valueText}>

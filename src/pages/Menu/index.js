@@ -62,7 +62,7 @@ export default function() {
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.9}
-            onPress={() => changeScreen('Transfer', 'TransferValue')}>
+            onPress={() => changeScreen('Transfer', 'TransferFavorites')}>
             <FunctionCard transactionType="Transfer">
               <TransferIcon stroke="#FFFFFF" />
             </FunctionCard>

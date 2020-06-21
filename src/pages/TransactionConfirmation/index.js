@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Modal, Input} from '@ui-kitten/components';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import TransactionContainer from '../../components/TransactionContainer';
 import styles from './styles';
 import CheckIcon from '../../assets/img/check.png';
@@ -33,11 +34,14 @@ export default function({route}) {
     setSecureTextEntry(!secureTextEntry);
   };
 
-  const renderIcon = () => (
-    <TouchableWithoutFeedback onPress={toggleSecureEntry}>
-      <Text>OLHO</Text>
-    </TouchableWithoutFeedback>
-  );
+  const renderIcon = () => {
+    const name = secureTextEntry ? 'eye' : 'eye-slash';
+    return (
+      <TouchableWithoutFeedback onPress={toggleSecureEntry}>
+        <Icon name={name} size={20} color="#000000" />
+      </TouchableWithoutFeedback>
+    );
+  };
 
   return (
     <TransactionContainer title={route.params.transaction}>
@@ -63,7 +67,7 @@ export default function({route}) {
         </View>
       </Modal>
       <View style={styles.main}>
-        <Text style={styles.titleText}>Confirm your data</Text>
+        <Text style={styles.titleText}>Confirm your transfer data</Text>
         <View style={{marginTop: 32}}>
           <Text style={styles.titleText}>
             Account: <Text style={{fontWeight: 'bold'}}>1</Text>

@@ -11,8 +11,9 @@ import Profile from './pages/Profile';
 // import DepositConfirmation from './pages/Deposit/DepositConfirmation';
 import TransactionValue from './pages/TransactionValue';
 import TransactionConfirmation from './pages/TransactionConfirmation';
-import Transfer from './pages/Transfer';
 import TransactionSuccess from './components/TransactionSuccess';
+import TransferFavorites from './pages/TransferFavorites';
+import TransferDetails from './pages/TransferDetails';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,8 @@ const WithdrawStack = () => (
 
 const TransferStack = () => (
   <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Screen name="TransferFavorites" component={TransferFavorites} />
+    <Stack.Screen name="TransferDetails" component={TransferDetails} />
     <Stack.Screen name="TransferValue" component={TransactionValue} />
     <Stack.Screen
       name="TransferConfirmation"

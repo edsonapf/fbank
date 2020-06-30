@@ -1,4 +1,7 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+
+const heightScreen = Dimensions.get('window').height;
+const widthScreen = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   main: {
@@ -37,6 +40,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
     textDecorationLine: 'underline',
+  },
+  backdrop: {
+    position: 'absolute',
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    height: heightScreen,
+    width: widthScreen,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

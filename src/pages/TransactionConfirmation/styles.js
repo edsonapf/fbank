@@ -4,8 +4,9 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     flexGrow: 1,
-    paddingHorizontal: 16,
-    paddingTop: 128,
+    justifyContent: 'space-around',
+    paddingVertical: 32,
+    paddingHorizontal: 8,
   },
   titleText: {
     color: '#000000',
@@ -15,13 +16,6 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 32,
     fontWeight: 'bold',
-  },
-  input: {
-    marginTop: 128,
-    marginBottom: 128,
-    borderBottomColor: '#000000',
-    borderBottomWidth: 2,
-    fontSize: 20,
   },
   button: {
     backgroundColor: '#000000',

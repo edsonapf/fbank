@@ -8,7 +8,7 @@ import styles from './styles';
 
 export default function({route}) {
   const navigation = useNavigation();
-  let cpfField = useRef();
+  let cpfField = useRef(null);
   const [account, setAccount] = useState('');
   const [name, setName] = useState('');
   const [cpf, setCpf] = useState('');

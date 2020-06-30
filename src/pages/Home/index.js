@@ -26,6 +26,8 @@ const monthNames = [
   'December',
 ];
 
+const dataset = [-1.5, 12, 346.65, 213.51, -321.25];
+
 const transactionMock = [
   {
     transaction_type: 1,
@@ -130,8 +132,13 @@ export default function() {
     );
   }
 
-  function onDataPointClick({value, dataset, getColor}) {
-    console.warn(value);
+  function renderDotContent({x, y, index}) {
+    return (
+      <Text
+        style={{position: 'absolute', top: y - 25, left: x - 10, fontSize: 12}}>
+        {dataset[index]}
+      </Text>
+    );
   }
 
   return (
@@ -150,7 +157,7 @@ export default function() {
           labels: ['January', 'February', 'March', 'April', 'May'],
           datasets: [
             {
-              data: [-1.5, 12, 346.65, 213.51, -321.25],
+              data: dataset,
             },
           ],
         }}
@@ -161,14 +168,14 @@ export default function() {
         height={220}
         yAxisLabel="$"
         yAxisInterval={1} // optional, defaults to 1
-        onDataPointClick={onDataPointClick}
+        renderDotContent={renderDotContent}
         chartConfig={{
           backgroundColor: '#ffffff',
           backgroundGradientFrom: '#ffffff',
           backgroundGradientTo: '#ffffff',
           decimalPlaces: 2, // optional, defaults to 2dp
-          color: () => `rgb(0, 0, 0, 0.3)`,
-          labelColor: () => `rgb(189, 202, 219)`,
+          color: () => 'rgb(0, 0, 0, 0.3)',
+          labelColor: () => 'rgb(189, 202, 219)',
           propsForDots: {
             r: '3',
             fill: '#000000',

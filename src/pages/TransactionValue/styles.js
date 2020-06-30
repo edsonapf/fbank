@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   main: {
     flex: 1,
+    justifyContent: 'space-around',
     flexGrow: 1,
     paddingHorizontal: 16,
   },
@@ -15,8 +16,8 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
   input: {
-    marginTop: 64,
-    marginBottom: 128,
+    // marginTop: 64,
+    // marginBottom: 128,
     borderBottomColor: '#000000',
     borderBottomWidth: 2,
     fontSize: 50,

@@ -66,22 +66,24 @@ export default function({route}) {
     navigation.navigate(`${transaction}Details`, {transaction});
   }
 
-  function renderItem({item, index}) {
+  function renderItem(item, index) {
     return (
-      <TouchableOpacity
-        key={index}
-        style={styles.listItem}
-        activeOpacity={0.5}
-        onPress={onPress}>
-        <View style={[styles.buttonIcon, {marginVertical: 4}]}>
-          <Image
-            source={{uri: item.profile_photo, height: 40, width: 40}}
-            style={{borderRadius: 500}}
-            resizeMode="contain"
-          />
-        </View>
-        <Text style={{fontSize: 16}}>{item.name}</Text>
-      </TouchableOpacity>
+      <View key={index} style={{paddingVertical: 4}}>
+        <Divider />
+        <TouchableOpacity
+          style={styles.listItem}
+          activeOpacity={0.5}
+          onPress={onPress}>
+          <View style={[styles.buttonIcon, {marginVertical: 4}]}>
+            <Image
+              source={{uri: item.profile_photo, height: 40, width: 40}}
+              style={{borderRadius: 500}}
+              resizeMode="contain"
+            />
+          </View>
+          <Text style={{fontSize: 16}}>{item.name}</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 
@@ -104,14 +106,16 @@ export default function({route}) {
           </View>
         </TouchableOpacity>
         <Text style={styles.contactTitleText}>Your contacts</Text>
-        {favorites && (
-          <List
-            data={favorites}
-            ItemSeparatorComponent={Divider}
-            renderItem={renderItem}
-            style={{marginTop: 16}}
-          />
-        )}
+        {favorites && favorites.map((item, index) => renderItem(item, index))
+        // (
+        //   <List
+        //     data={favorites}
+        //     ItemSeparatorComponent={Divider}
+        //     renderItem={renderItem}
+        //     style={{marginTop: 16}}
+        //   />
+        // )
+        }
       </View>
     </TransactionContainer>
   );

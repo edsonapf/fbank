@@ -25,37 +25,47 @@ export default function({route}) {
 
   return (
     <TransactionContainer title={route.params.transaction}>
-      <View
-        style={[
-          styles.main,
-          {paddingTop: route.params.transaction === 'Withdraw' ? 64 : 128},
-        ]}>
-        {route.params.transaction === 'Withdraw' && (
-          <View style={{alignItems: 'center', marginBottom: 32}}>
-            <Text style={styles.titleText}>Account balance</Text>
-            <Text style={styles.balanceText}>$ 120.00</Text>
-          </View>
-        )}
-        <Text style={styles.titleText}>
-          Type the{' '}
-          <Text style={{fontWeight: 'bold'}}>{route.params.transaction}</Text>{' '}
-          value
-        </Text>
-        <TextInputMask
-          style={styles.input}
-          type={'money'}
-          options={{
-            precision: 2,
-            separator: '.',
-            delimiter: ',',
-            unit: '$',
-          }}
-          onChangeText={onChangeText}
-          value={value}
-          keyboardType="decimal-pad"
-          ref={ref => (cpfField = ref)}
-        />
-        <View style={{alignItems: 'center', marginBottom: 4}}>
+      <View style={styles.main}>
+        <View
+          style={{
+            // backgroundColor: 'red',
+            flex: 2,
+            justifyContent: 'space-around',
+          }}>
+          {route.params.transaction === 'Withdraw' && (
+            <View style={{alignItems: 'center'}}>
+              <Text style={styles.titleText}>Account balance</Text>
+              <Text style={styles.balanceText}>$ 120.00</Text>
+            </View>
+          )}
+          <Text style={styles.titleText}>
+            Type the{' '}
+            <Text style={{fontWeight: 'bold'}}>{route.params.transaction}</Text>{' '}
+            value
+          </Text>
+          <TextInputMask
+            style={styles.input}
+            type={'money'}
+            options={{
+              precision: 2,
+              separator: '.',
+              delimiter: ',',
+              unit: '$',
+            }}
+            onChangeText={onChangeText}
+            value={value}
+            keyboardType="decimal-pad"
+            ref={ref => (cpfField = ref)}
+          />
+        </View>
+        <View
+          style={{
+            alignItems: 'center',
+            marginBottom: 4,
+            flex: 1,
+            // backgroundColor: 'red',
+            justifyContent: 'center',
+          }}>
           <TouchableOpacity style={styles.button} onPress={onPress}>
             <Image source={CheckIcon} />
           </TouchableOpacity>

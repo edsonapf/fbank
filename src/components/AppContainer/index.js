@@ -7,7 +7,7 @@ export default function({menu, photo, finish, children}) {
   return (
     <KeyboardAvoidingView style={styles.main}>
       <Header menu={menu} photo={photo} finish={finish} />
-      <ScrollView style={styles.scroll}>{children}</ScrollView>
+      <ScrollView contentContainerStyle={styles.scroll}>{children}</ScrollView>
     </KeyboardAvoidingView>
   );
 }

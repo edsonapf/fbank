@@ -3,7 +3,7 @@ import {LOGIN, LOGOUT, GET_USER} from '../consts/user';
 
 const initialState = {
   user: {
-    isLogged: true,
+    isLogged: false,
     data: {
       name: 'Will Smith da Silva',
       cpf: '12345678914',

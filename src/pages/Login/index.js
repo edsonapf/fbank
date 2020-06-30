@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   Text,
   KeyboardAvoidingView,
@@ -7,9 +7,12 @@ import {
   TouchableOpacity,
   Image,
   View,
+  ActivityIndicator,
+  Dimensions,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
+import {TextInputMask} from 'react-native-masked-text';
 import FbankApi from '../../services';
 import {login as loginAction} from '../../store/actions/userAction';
 import styles from './styles';
@@ -17,19 +20,24 @@ import Logo from '../../assets/img/logo.svg';
 import Check from '../../assets/img/check.png';
 
 export default function() {
+  let cpfField = useRef(null);
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   async function login() {
     try {
+      setLoading(true);
       const {token, refreshToken} = await FbankApi.login(cpf, password);
       await AsyncStorage.setItem('token', token);
       await AsyncStorage.setItem('refresh_token', refreshToken);
       dispatch(loginAction({token, refreshToken}));
     } catch (err) {
       const error = JSON.parse(err.message);
-      console.warn(error);
+      // console.warn(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -55,11 +63,13 @@ export default function() {
         <Logo height={250} width={250} />
         <View style={{width: '100%'}}>
           <Text style={styles.inputTitles}>CPF</Text>
-          <TextInput
+          <TextInputMask
             style={styles.input}
             onChangeText={text => setCpf(text)}
             value={cpf}
             keyboardType="number-pad"
+            type="cpf"
+            ref={ref => (cpfField = ref)}
           />
         </View>
         <View style={{width: '100%'}}>
@@ -86,6 +96,11 @@ export default function() {
         <TouchableOpacity activeOpacity={0.5}>
           <Text style={styles.footerText}>About Us</Text>
         </TouchableOpacity>
+        {loading && (
+          <View style={styles.backdrop}>
+            <ActivityIndicator size="large" color="#FFFFFF" />
+          </View>
+        )}
       </ScrollView>
     </KeyboardAvoidingView>
   );
